@@ -1,0 +1,37 @@
+Milestone-6:
+    Identity and access Management Security:
+        IAM is a web service that helps securely control access to AWS resources by managing user's ,permission and credentials.
+        1-IAM Users:
+            While adding users in IAM , permission can be set by three wasys:
+            a: add user to a group
+            b: copy permission
+            c: attached policy directly
+
+            while creating user we will get , username,console password and console login URL.
+            Please note that when you login to the coseole usrl, you will see right hand side, aws root account username and just below you wil find the IAM user.
+
+            How to change the alias in URL: just click on the IAM -> Dashboard. create new alias right hand side.
+                https://376313750236.signin.aws.amazon.com/console
+                https://ashish222148git.signin.aws.amazon.com/console
+        2-IAM Policy:
+            there are three types of IAM Policy:
+                1-aws managed policy-(a-aws managed policy - general use b-Service linked policy -specific to aws services)
+                2-cutomer managed policy
+                3-inline policy
+            Policy can be attached with user, groups and roles.
+
+            1-AWS Managed Policy
+            2-Customer Managed Policy
+            3-Inline Policy
+
+            2-Customer Managed Policy:
+                IAM -> Policy Simulator(we can check whether our policy is working fine or not)
+                in the cutomer managed policy: we define our own policy, for example we have two instance and we want to apply stop instance on any one of instance, so aws managed policy will not be work here.
+                we have  to create our own policy. 
+                and in write section we haveto mention the stop policy and then rete the policy and attach the policy to the IAM user.
+
+                Note: If there is no any olicy attached with user, default is Deny.
+                    Expilictly deny : If policy explicitly denies any action, that deny take precedence over any allow.
+
+
+
