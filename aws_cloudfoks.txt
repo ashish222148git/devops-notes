@@ -33,5 +33,80 @@ Milestone-6:
                 Note: If there is no any olicy attached with user, default is Deny.
                     Expilictly deny : If policy explicitly denies any action, that deny take precedence over any allow.
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+    types of Identity:
+        1-user
+        2-group
+        3-role
+
+    Most Imp: IAM Role:
+        A role gives you temorary credentials when assumed. unlike IAM Users , for whom we create long-term password for access.
+        you can use roles to deletegate access to users , application or services that don't have normally access to your aws resources.
+
+        IAM instance profile: It stores all the roles available in the aws.
+
+            aws sts get-caller-identity
+
+        Trusted Entity: To whol role can be assignd.
+
+        1-aws services: assign role to the aws services
+        2-aws account: assume role:
+        3-web identity: 
+        4-SAML 2.0 federation
+        5-Custom trust Policy
+            1-aws services: like aws services (ec2) have the permission to access the resources. 
+
+            2-aws account: assume role 
+                a-same account access
+                b-cross account access
+                    assume role is an aws iam action that allows an iam identity (user, services or application) to temorary access. it is for limited time only(15 minutes to 12 hours by defalut 12  ). there will be security credentials
+                    provoded by aws sts (Security Token services).
+                    use cases:
+                        amit a developer, needs daily access to ec2 instance but only occassional access to an S3 bucket.
+                        -create user amit-attache inline policy ec2full access-create role by selecting trusted entity as AWS account and add permission. goto role and add trust relationship as adding amituser's arn.
+
+            3/4:SAML 2.0 federation & Custom trust Policy:
+                these are sucrity feature that enable secure access to your aws resources using temporary credentials  obtained through extenal identity provider
+                JWT token: Jason Web tokens
+                Example of IDps using OAuth and OIDC : Google /Facebook /Login with amazon
+                SAML: Security Assertion markup language:
+                    SAM does not use JWT tokens, relying instaed of XML for its Assertion.
+                    Example: ADFS Active Directory federation services.
+
+            5-Custom trust  policy:The Custom option allow you to craft a policy that specify exactly wh can assume the role under what circumstances.
+
+        Summary:
+            1-If you want another aws service within your account to access the role: "AWS Service"
+            2-If you want IAM user/roles within the same account to assume the role: "AWS Account"
+            3-If you want authenticated by external IDPs like Google or Login with Amazon to access the role ,choose "web identity"
+            4-If you want user authenticated by trusted SAML 2.0  IDP to access the role , choose "SAML 2.0 federation"
+            5-If you a more complex scenario with special requirement , use the custom option and draft a tailored trust policy.
+
+        IAM root Best Practice:
+            1-multi factor authentication
+            2-never use root user
+            3-root user security
+        
+    IAM Reports:
+        1-IAM Credential Reports: Provide an overview of IAM user credentials status within an AWS account.
+        2-IAM access advisior Reports: (last access) what are the permission, when it is last accessed.
+        3-AWS IAM access analyzer Reports:external access analysis and unused access analysis, we can enable per region
+
+        
+
+
+
+
+
+
+        
+
+
+
+
+         
+
+
 
 
