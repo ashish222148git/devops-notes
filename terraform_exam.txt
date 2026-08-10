@@ -1,0 +1,101 @@
+Day-10
+State file Migration: IS it possible to move terraform state file from local to s3 , but we can not transfer fro remote to local.
+#reason , when we trasfre from local to remote we mention tw backend, one is local and second is remote, but in case of remote to local we don'thve any otheroption.
+
+Terraform version:
+    1-community edition:
+    2-enterprise edition:
+        :SAAS: no installation required , just signup , pay and go (Terraform cloud)
+        :Hosted:you get the terraform portal installed on on premises.
+
+    Pros of EE:
+
+        workflow management
+        central state file management
+        state file versioning
+        Identity and Access
+        Sentinel policy
+
+SAAS:  app.terraform.io
+    organization: root
+        project: folder
+            workspaces: contain state file 
+first we create project with the unique name.
+by default we have a project
+
+here basically organization and projectuse for providing Access, for example , if we provide access on oraganization level , user will getthe access on all the folder within this organization.
+terraform workspace --help
+terraform workspace list
+terraform workspace show
+terraform workspace new ashish
+terraform workspace select arun
+
+Workspace:
+    workspace could be of three types: cli driven, version control and api-driven
+        1- CLI driven:(workspace)
+            main.tf (plan/apply) -->tfe cloud-->aws(target)
+            main.tf could be on local or cicd.
+                here tfe cloud is used for only state file.
+
+                cli driven :
+                    1-excution plan local: plan/ apply will run from local machine/cicd , same will be apply on aws and state file will be on tfe coud. aws cred will be on local/cicd
+                    2-exection mode remote: plan and alpply we raun from local/cicd, but it actually run on tfe cloud and same will be streamed on local/cicd. aws cred will be on tfe cloud.
+
+            Conclusion: in local execution, tfe cloud will be work as backend to manage the state file. no workflow management because we are running plan/apply from local/cicd. and that will be 
+                directly applied on aws. but in remote driven , plan/apply will be run from tef cloud, so we could use workflow management (like approve/reject ) and aws cred will be also on tfe cloud.
+        One more Imp concept: While we mention backend cloud, earlier terraform backend which was s3 , will be migrate to cloud, 
+        How it happens? there is one more {}terraform.tfstae file getcreate when e mention backend as s3 in the ./terraform/provider folder, which contain the information of the current backend.
+        as pper the rule, we can not mentioned second second backend, so  it reads from the current {}terraform.tfstate file and proess accordingly.
+
+        we can not terraform init command here, because we are not able to authorize to tfe, so on cmd what we run, terraform login app.terraform.io
+
+    2-Version Control:(work space)
+        there will be a speculative plan, which run after rising the PR and before merging to main branch (before reviewr approve the PR)
+    Sentinel policy run after plan and before apply.
+    Sentinel policy will be apply at organization level not  workspace level:
+
+
+Day-11:
+from where we are calling to other module is aclled root module, and the module which we are calling is known as child module.
+Module is just like a function, as we can pass the vaue to the function from where we calling, same thing happening in module.
+Module is of two types:
+    1-private module
+    2-public module
+
+In case we are using public module, two things are mandatory:
+    1-source
+    2-version
+    module source:
+    1-local: no versioning. only local path
+    2-git: github.com/abd/ghjj?ref=(branchname|tagname) -here we give vrsion , not in code
+    3-terraform private registry:full url with version code
+    4-terraform public registry: no full url required. name will start with terraform.-aws-, version shold be there in code
+    5-s3 :https://s3..../vpc.zip (no versioning like local)
+    6-http url:http://.....zip no versioning
+
+Most Imp: When we mention module, terraform initis must, because we download the module.
+
+
+local module:
+    local --git--private registry
+    avoid use of loop in module (for_each,count) as much as possible, avoid this.
+    variablised all the variable 
+    don't mention terraform block and provider block in child module.
+
+    how to getthe output ofthe child module in the output ofthe parent module:
+
+    if you create repository on github:
+        nomenclature should be like : terraform-provider(aws)-myrsourcemode
+        keep child module on github
+        https://github.com/ashish222148git/terraform-aws-ashishmodule.git copy the link of git hub but keep in the below format in odule section:
+        source="github.com/ashish222148git/terraform-aws-ashishmodule?ref=main"
+        we can also provide vesrion of the code instaed of branch name 
+        source="github.com/ashish222148git/terraform-aws-ashishmodule?ref=v.10"
+
+the we can push our git hub repo on the terraform enterprise private registry
+
+
+    
+
+
+
