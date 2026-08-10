@@ -8,7 +8,7 @@ Milestone-6:
             c: attached policy directly
 
             while creating user we will get , username,console password and console login URL.
-            Please note that when you login to the coseole usrl, you will see right hand side, aws root account username and just below you wil find the IAM user.
+            Please note that when you login to the console usl, you will see right hand side, aws root account username and just below you wil find the IAM user.
 
             How to change the alias in URL: just click on the IAM -> Dashboard. create new alias right hand side.
                 https://376313750236.signin.aws.amazon.com/console
@@ -26,12 +26,12 @@ Milestone-6:
 
             2-Customer Managed Policy:
                 IAM -> Policy Simulator(we can check whether our policy is working fine or not)
-                in the cutomer managed policy: we define our own policy, for example we have two instance and we want to apply stop instance on any one of instance, so aws managed policy will not be work here.
+                in the customer managed policy: we define our own policy, for example we have two instance and we want to apply stop instance on any one of instance, so aws managed policy will not be work here.
                 we have  to create our own policy. 
-                and in write section we haveto mention the stop policy and then rete the policy and attach the policy to the IAM user.
+                and in write section we have to mention the stop policy and then create the policy and attach the policy to the IAM user.
 
-                Note: If there is no any olicy attached with user, default is Deny.
-                    Expilictly deny : If policy explicitly denies any action, that deny take precedence over any allow.
+                Note: If there is no any policy attached with user, default is Deny.
+                    Explicitly deny : If policy explicitly denies any action, that deny take precedence over any allow.
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -41,14 +41,14 @@ Milestone-6:
         3-role
 
     Most Imp: IAM Role:
-        A role gives you temorary credentials when assumed. unlike IAM Users , for whom we create long-term password for access.
-        you can use roles to deletegate access to users , application or services that don't have normally access to your aws resources.
+        A role gives you temporary credentials when assumed. unlike IAM Users , for whom we create long-term password for access.
+        you can use roles to delegate access to users , application or services that don't have normally access to your aws resources.
 
         IAM instance profile: It stores all the roles available in the aws.
 
             aws sts get-caller-identity
 
-        Trusted Entity: To whol role can be assignd.
+        Trusted Entity: To whom role can be assigned.
 
         1-aws services: assign role to the aws services
         2-aws account: assume role:
@@ -60,11 +60,11 @@ Milestone-6:
             2-aws account: assume role 
                 a-same account access
                 b-cross account access
-                    assume role is an aws iam action that allows an iam identity (user, services or application) to temorary access. it is for limited time only(15 minutes to 12 hours by defalut 12  ). there will be security credentials
-                    provoded by aws sts (Security Token services).
+                    assume role is an aws iam action that allows an iam identity (user, services or application) to temporary access. it is for limited time only(15 minutes to 12 hours by default 12  ). there will be security credentials
+                    provided by aws sts (Security Token services).
                     use cases:
-                        amit a developer, needs daily access to ec2 instance but only occassional access to an S3 bucket.
-                        -create user amit-attache inline policy ec2full access-create role by selecting trusted entity as AWS account and add permission. goto role and add trust relationship as adding amituser's arn.
+                        amit a developer, needs daily access to ec2 instance but only occasional access to an S3 bucket.
+                        -create user amir-attach inline policy ec2full access-create role by selecting trusted entity as AWS account and add permission. goto role and add trust relationship as adding amituser's arn.
 
             3/4:SAML 2.0 federation & Custom trust Policy:
                 these are sucrity feature that enable secure access to your aws resources using temporary credentials  obtained through extenal identity provider
@@ -90,7 +90,7 @@ Milestone-6:
         
     IAM Reports:
         1-IAM Credential Reports: Provide an overview of IAM user credentials status within an AWS account.
-        2-IAM access advisior Reports: (last access) what are the permission, when it is last accessed.
+        2-IAM access advisor Reports: (last access) what are the permission, when it is last accessed.
         3-AWS IAM access analyzer Reports:external access analysis and unused access analysis, we can enable per region
 
         
