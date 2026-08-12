@@ -93,11 +93,17 @@ Milestone-6:
         2-IAM access advisior Reports: (last access) what are the permission, when it is last accessed.
         3-AWS IAM access analyzer Reports:external access analysis and unused access analysis, we can enable per region
 
-        
+    
+    Organization:aws Organization is used to manage the multoiple aws account.
+        SCPs(Service Control Policy): Define and Apply policy at account or Organizational level to restrict service and actions.
+        from the option billing preferance , we can manage both ccount billing.
 
 
 
+    Very Imp: How IAM identity center works:
 
+Most Imp:        we create use in dentity center (or external user), then we create permission set for all the accounts. and attch the permission set to the desired account. when we login, it will ask for the account, then permission set
+        and when you login right hand side it shows, abcdfgrt/user as fedreated user, hear abcdfgrt is the permission set and user is the user crated in identity center.
 
 
         
